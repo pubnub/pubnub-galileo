@@ -28,25 +28,63 @@ Final verdict: I think we're seeing a glimpse of future of IOT development.
 
 ![](http://media.giphy.com/media/KayVJ5lkB84rm/giphy.gif)
 
-# How it works
+# Overview
 
-* Intel Galileo
-  *
-* NodeJS
-* PubNub
-* EON-chart
+* Intel Galileo Gen 2 - The beautiful blue chip that publishes potentiometer resistance to the internet.
+* NodeJS - Running on the Galileo linux environment 
+* PubNub - Realtime Data Stream Network that connects the Galileo to Eon-chart
+* EON-chart - Realtime charting framework that connects to PubNub and renders the resistance value.
 
-# Follow these instructions
+# Setup the Galileo
 
-* http://rexstjohn.com/galileo-gen-2-setup/
-* Extra
- * Thunderbolt Ethernet adapter
- * Enable BootP
- * ![](http://i.imgur.com/cvKgdsN.png)
- * ![](http://i.imgur.com/L9rIytE.jpg)
+This tutorial assumes you own a Mac and a Galileo Gen 2. 
+
+The very first step is to format an SD card (I stole mine from my Raspberry Pi starter kit) and update the firmware. Nothing worked for me until I did this.
+
+[Follow this guide](http://rexstjohn.com/galileo-gen-2-setup/)
+
+I also used a Thunderbolt Ethernet adapter to share my MacBook connection with my Galileo. I usually have an easier time setting my sharing to BootP when this is the case. If you have your Galileo plugged directly into a switch, ignore this.
+
+![](http://i.imgur.com/cvKgdsN.png)
+
+# Set up the XDK
+
+![](http://i.imgur.com/L9rIytE.jpg)
+
+Once you're all setup and get connected to your Galileo, you should see the following screen. Run a couple demo programs on the chip to get a feel for how the IDE works.
+
+# Wire the Potentiometer
+
+Wiring a Potentiometer is extremely easy. You feed 5v through one side, ground through the other, and the middle wire ouputs the resistance.
+
+![](http://arduino.cc/en/uploads/Tutorial/potentiometer.jpg)
 
 # Code walkthrough
 
+Start with the Analog input example in the IOT XDK. 
+
+In the package.json add PubNub as a dependency:
+
+```js
+{
+  "name": "pubnub-galileo",
+  "description": "",
+  "version": "0.0.0",
+  "main": "main.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+      "pubnub": "3.7.10"
+  }
+}
+```
+
+Then click Install/Build. This essentially runs ```npm install``` on your Galileo.
+
+Now, you can modify the example to look like this or copy paste. 
+
+The following example reads the value of analog pin ```0``` every ```500ms```, and publishes it to the PubNub network if it changes.
 
 ```js
 var mraa = require('mraa');
@@ -87,7 +125,22 @@ setInterval(function(){
 }, 500);
 ```
 
-![](http://i.imgur.com/vtKPWmG.gif)
+This is the publishing part:
+
+```js
+pubnub.publish({
+  channel: 'pubnub-intel-gal-demo',
+  message: {
+    columns: [
+      ['Potentiometer', percent]
+    ]
+  }
+ });
+ ```
+ 
+ The ```channel``` is the name of the room for which we'll subscribe to messages on the other end. The ```message``` is formatted like so because it matches the schema defined in eon-chart. More on that later.
+ 
+ If you need more help with PubNub, check out our Javascript SDK Examples.
 
 ```html
 <html>
