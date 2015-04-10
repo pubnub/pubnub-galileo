@@ -1,5 +1,7 @@
 # Create a Potentiometer IOT Dashboard
 
+![](http://i.imgur.com/4aerUHX.gif)
+
 * PubNub + 
   * Creating IOT House
   * Got a free thing:
@@ -14,6 +16,8 @@
 * Follow these instructions
   * http://rexstjohn.com/galileo-gen-2-setup/
 * Code walkthrough
+
+![](http://i.imgur.com/vtKPWmG.gif)
 
 ```js
 var mraa = require('mraa');
@@ -52,19 +56,4 @@ setInterval(function(){
     }
 
 }, 500);
-```
-
-```js
-{
-  "name": "AnalogRead",
-  "description": "",
-  "version": "0.0.0",
-  "main": "main.js",
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "dependencies": {
-      "pubnub": "3.7.10"
-  }
-}
 ```
