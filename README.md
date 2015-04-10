@@ -22,17 +22,16 @@ However! Once you're setup you can not beat the Intel XDK IOT environment.
 
 This thing is beefy, it's like Eclipse for Javascript and IOT. The IDE includes Error checking (jshint), deployment, NPM UI buttons, and a freakin devtools inspector! That's not even mentioning access to an Arduino inspired header layout, all accessable from NPM modules that come with every example.
 
-![](http://i.imgur.com/MNESWyf.jpg)
-
 There are some downsides however. For now, it's a little slow and buggy. I found it hard to rename projects, and if I left a Node process running it wouldn't terminate when I redeployed. Followers of this tutorial may encounter the same bugs.
 
-I think we're seeing a glimpse of future of IOT development. 
+Final verdict: I think we're seeing a glimpse of future of IOT development. 
 
 ![](http://media.giphy.com/media/KayVJ5lkB84rm/giphy.gif)
 
 # How it works
 
 * Intel Galileo
+  *
 * NodeJS
 * PubNub
 * EON-chart
