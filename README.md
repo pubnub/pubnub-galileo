@@ -15,9 +15,13 @@
   * EON-chart 
 * Follow these instructions
   * http://rexstjohn.com/galileo-gen-2-setup/
+  * Extra
+   * Thunderbolt Ethernet adapter
+   * Enable BootP
+   * ![](http://i.imgur.com/cvKgdsN.png)
+   * ![](http://i.imgur.com/L9rIytE.jpg)
 * Code walkthrough
 
-![](http://i.imgur.com/vtKPWmG.gif)
 
 ```js
 var mraa = require('mraa');
@@ -57,3 +61,39 @@ setInterval(function(){
 
 }, 500);
 ```
+
+```html
+<html>
+  <head>
+    <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
+  </head>
+  <body>
+    <div id="chart"></div>
+    <script>
+      var channel = "pubnub-intel-gal-demo";
+      eon.chart({
+        channel: channel,
+        generate: {
+          bindto: '#chart',
+          data: {
+            type: 'gauge',
+          },
+          gauge: {
+            min: 0,
+            max: 100
+          },
+          color: {
+            pattern: ['#FF0000', '#F6C600', '#60B044'],
+            threshold: {
+              values: [30, 60, 90]
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+```
+
+Keywords: Mac, thunderbolt, ethernet, galileo, iot, dashboard, realtime chart, potentiometer, gen 2 
