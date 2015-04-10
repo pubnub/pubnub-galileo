@@ -33,7 +33,7 @@ Final verdict: I think we're seeing a glimpse of future of IOT development.
 * Intel Galileo Gen 2 - The beautiful blue chip that publishes potentiometer resistance to the internet.
 * NodeJS - Running on the Galileo linux environment 
 * PubNub - Realtime Data Stream Network that connects the Galileo to Eon-chart
-* EON-chart - Realtime charting framework that connects to PubNub and renders the resistance value.
+* EON-chart - Realtime charting framework that connects to PubNub and renders the resistance value in HTML.
 
 # Setup the Galileo
 
@@ -140,7 +140,52 @@ pubnub.publish({
  
  The ```channel``` is the name of the room for which we'll subscribe to messages on the other end. The ```message``` is formatted like so because it matches the schema defined in eon-chart. More on that later.
  
+ If everything is working you should see the value of the potentiometer output to [the PubNub console here](http://www.pubnub.com/console/?channel=pubnub-intel-gal-demo&origin=pubsub.pubnub.com&sub=demo&pub=demo&cipher=&ssl=false&secret=&auth=).
+ 
  If you need more help with PubNub, check out our Javascript SDK Examples.
+ 
+ # The Dashboard
+
+Now render the chart on an HTML webpage. We include the ```eon``` framework in the head of the page, and that'll take care of most of the work.
+
+```html
+  <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
+  <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
+```
+  
+Now crate the chart with eon-chart. With this one function, we'll connect to the same PubNub channel the Galileo is broadcasting from (```pubnub-intel-gal-demo```), and render the data in a ```gauge``` type chart.
+
+![](http://pubnub.github.io/eon/static/images/gauge.gif)
+
+```html
+<div id="chart"></div>
+<script>
+  var channel = "pubnub-intel-gal-demo";
+  eon.chart({
+    channel: channel,
+    generate: {
+      bindto: '#chart',
+      data: {
+        type: 'gauge',
+      },
+      gauge: {
+        min: 0,
+        max: 100
+      },
+      color: {
+        pattern: ['#FF0000', '#F6C600', '#60B044'],
+        threshold: {
+          values: [30, 60, 90]
+        }
+      }
+    }
+  });
+</script>
+```
+
+Load this page up in chrome and turn the potentiometer. 
+
+![](http://i.imgur.com/4aerUHX.gif)
 
 ```html
 <html>
