@@ -62,6 +62,8 @@ setInterval(function(){
 }, 500);
 ```
 
+![](http://i.imgur.com/vtKPWmG.gif)
+
 ```html
 <html>
   <head>
