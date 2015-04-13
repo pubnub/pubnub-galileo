@@ -22,28 +22,28 @@ However! Once you're setup you can not beat the Intel XDK IOT environment.
 
 This thing is beefy, it's like Eclipse for Javascript and IOT. The IDE includes Error checking (jshint), deployment, NPM UI buttons, and a freakin devtools inspector! That's not even mentioning access to an Arduino inspired header layout, all accessable from NPM modules that come with every example.
 
-There are some downsides however. For now, it's a little slow and buggy. I found it hard to rename projects, and if I left a Node process running it wouldn't terminate when I redeployed. Followers of this tutorial may encounter the same bugs.
+There are some downsides however. For now, it's a little slow and buggy. I found it hard to rename projects, and if I left a Node process running it wouldn't terminate when I redeployed. Followers of this tutorial may encounter the same bugs. I expect that with time the environment will become more stable.
 
-Final verdict: I think we're seeing a glimpse of future of IOT development. 
+I really think we're seeing a glimpse of future of IOT development. You can't beat coding NodeJS on microcontrollers, especially when it's this easy.
 
 ![](http://media.giphy.com/media/KayVJ5lkB84rm/giphy.gif)
 
 # Overview
 
-* Intel Galileo Gen 2 - The beautiful blue chip that publishes potentiometer resistance to the internet.
-* NodeJS - Running on the Galileo linux environment 
-* PubNub - Realtime Data Stream Network that connects the Galileo to Eon-chart
-* EON-chart - Realtime charting framework that connects to PubNub and renders the resistance value in HTML.
+* [Intel Galileo Gen 2](http://www.intel.com/content/www/us/en/do-it-yourself/galileo-maker-quark-board.html) - The beautiful blue chip that publishes potentiometer resistance to the internet.
+* [NodeJS](https://nodejs.org/) - Running on the Galileo linux environment 
+* [PubNub](http://www.pubnub.com/) - Realtime Data Stream Network that connects the Galileo to Eon-chart
+* [EON-chart](pubnub.com/developers/eon) - Realtime charting framework that connects to PubNub and renders the resistance value in HTML.
 
 # Setup the Galileo
 
 This tutorial assumes you own a Mac and a Galileo Gen 2. 
 
-The very first step is to format an SD card (I stole mine from my Raspberry Pi starter kit) and update the firmware. Nothing worked for me until I did this.
+The very first step is to format an SD card (I stole mine from my Raspberry Pi starter kit) and update the firmware. I wasted a lot of time trying to get set up on old firmware. 
 
-[Follow this guide](http://rexstjohn.com/galileo-gen-2-setup/)
+[Follow this guide for detailed instructions](http://rexstjohn.com/galileo-gen-2-setup/). After you complete the stepsin this guide you'll haev Node running on your Galileo and you'll be ready to get hacking.
 
-I also used a Thunderbolt Ethernet adapter to share my MacBook connection with my Galileo. I usually have an easier time setting my sharing to BootP when this is the case. If you have your Galileo plugged directly into a switch, ignore this.
+It's also worth noting that I used a Thunderbolt Ethernet adapter to share my MacBook connection with my Galileo. I usually have an easier time setting my sharing to BootP when this is the case. If you have your Galileo plugged directly into a switch, ignore this.
 
 ![](http://i.imgur.com/cvKgdsN.png)
 
