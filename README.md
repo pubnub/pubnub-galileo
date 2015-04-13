@@ -1,20 +1,20 @@
-# Create a Potentiometer IOT Dashboard
+# Create an IOT dashboard with Intel Galileo 
 
 ![](http://i.imgur.com/4aerUHX.gif)
 
-I've had this idea for a demo for a while. This is actually the second version. The idea spawned the EON framework, and the demo was converted into a full fledged library before being released.
+Have you ever wanted to create a dashboard for your car, home, server cluster, or anything else? Dashboards are becoming increasingly popular as begin to connect all sorts of different objects to the internet. That's why we created EON, a framework for creating realtime dashboards using charts and maps.
 
-Now that EON is complete, we're revisting the idea that started it all. The potentiometer demo.
+## Background
 
-I originally tried to build this with Raspberry Pi, but discovered it doesn't have Analog inputs. While I wait on my Analog to Digital Converter, I dug through my supply and rediscovered the shiny Intel Galileo I got from participating in the IOT contest on CodeProject.
+The demo we're about to cover inspired an entire framework. I first prototyped a potentiometer dashboard a few weeks ago, and that demo was converted into a plug and play library called EON. Now that EON is complete, we're revisting the idea that started it all. The potentiometer demo.
 
-My entry in that contest was a super cool remote controlled model house.
+I originally tried to build this with Raspberry Pi, but discovered it doesn't have Analog inputs. While I wait on my Analog to Digital Converter, I dug through my supply and rediscovered the shiny Intel Galileo I got from participating in the [IOT contest on CodeProject](http://www.codeproject.com/Competitions/772/Internet-of-Things-Tutorial-Contest.aspx).
 
 # Intel Galileo Gen 2
 
 ![](http://www.intorobotics.com/wp-content/uploads/2014/12/intel-galileo-gen-2.jpg)
 
-The Intel Galileo is really a fantastic product. Not only are you getting Intel quality hardware, packaging, and documentation, but it also comes with a custom IDE powered by Brackets. It was harder to setup than the Raspberry Pi and Arduino (Uno and Yun). 
+The [Intel Galileo](http://www.intel.com/content/www/us/en/do-it-yourself/galileo-maker-quark-board.html) is really a fantastic product. Not only are you getting Intel quality hardware, packaging, and documentation, but it also comes with a custom IDE powered by Brackets. It was harder to setup than the Raspberry Pi and Arduino (Uno and Yun). 
 
 However! Once you're setup you can not beat the Intel XDK IOT environment. 
 
