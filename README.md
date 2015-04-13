@@ -51,17 +51,27 @@ It's also worth noting that I used a Thunderbolt Ethernet adapter to share my Ma
 
 ![](http://i.imgur.com/L9rIytE.jpg)
 
-Once you're all setup and get connected to your Galileo, you should see the following screen. Run a couple demo programs on the chip to get a feel for how the IDE works.
+Once you're all setup and get connected to your Galileo, you should see the following screen. Try running "Onboard LED BLink" and then the "Analog Read" templates to get a feel for how the Galileo works.
+
+All we're gonna do is modify the Analog Read demo to publish the values of Pin 0 to the internet (over PubNub). PubNub has an easy to use package for this, but more on that later.
 
 # Wire the Potentiometer
 
-Wiring a Potentiometer is extremely easy. You feed 5v through one side, ground through the other, and the middle wire ouputs the resistance.
+The Analog Read demo is pretty boring without any anlog input. Let's wire the potentiometer.
+
+Potentiometers are simple. 5 volts goes into one pin and the ground goes out the other pin. When you turn the potentiometer, it increases or decreases resistance and that value is fed out the middle pin.
+
+Here's an example of a potentiometer wired into an Arduino.
 
 ![](http://arduino.cc/en/uploads/Tutorial/potentiometer.jpg)
 
+However, this diagram shows the wiring into analog input 2, while we're going to be using analog input 0.
+
+You can test your setup with a multimeter, or dive right into the code.
+
 # Code walkthrough
 
-Start with the Analog input example in the IOT XDK. 
+Back to NodeJS. Start by loading the the Analog Read example in the IOT XDK. 
 
 In the package.json add PubNub as a dependency:
 
@@ -80,9 +90,7 @@ In the package.json add PubNub as a dependency:
 }
 ```
 
-Then click Install/Build. This essentially runs ```npm install``` on your Galileo.
-
-Now, you can modify the example to look like this or copy paste. 
+Then click Install/Build. This essentially runs ```npm install``` on your Galileo and adds the PubNub library to your build. PubNub is the backend for this demo; it allows us to publish the value of the potentiometer to the internet and read it somewhere else.
 
 The following example reads the value of analog pin ```0``` every ```500ms```, and publishes it to the PubNub network if it changes.
 
@@ -138,22 +146,24 @@ pubnub.publish({
  });
  ```
  
- The ```channel``` is the name of the room for which we'll subscribe to messages on the other end. The ```message``` is formatted like so because it matches the schema defined in eon-chart. More on that later.
+The ```channel``` is the name of the room for which we'll subscribe to messages on the other end. The ```message``` is formatted like so because it matches the schema defined in eon-chart. More on that later.
  
- If everything is working you should see the value of the potentiometer output to [the PubNub console here](http://www.pubnub.com/console/?channel=pubnub-intel-gal-demo&origin=pubsub.pubnub.com&sub=demo&pub=demo&cipher=&ssl=false&secret=&auth=).
+If everything is working you should see the value of the potentiometer output to [the PubNub console here](http://www.pubnub.com/console/?channel=pubnub-intel-gal-demo&origin=pubsub.pubnub.com&sub=demo&pub=demo&cipher=&ssl=false&secret=&auth=).
  
- If you need more help with PubNub, check out our Javascript SDK Examples.
- 
- # The Dashboard
+This means we're halfway there. The value is being read from the Galileo and published over PubNub to the internet. If you need more help with PubNub, check out our Javascript SDK Examples.
 
-Now render the chart on an HTML webpage. We include the ```eon``` framework in the head of the page, and that'll take care of most of the work.
+Now to render that value in a nice dashboard.
+ 
+# The Dashboard
+
+Now to create an HTML webpage to render the chart. We include the ```eon``` framework in the head of the page, and that'll take care of connecting to PubNub and creating our chart. Easy huh?
 
 ```html
   <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
   <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
 ```
   
-Now crate the chart with eon-chart. With this one function, we'll connect to the same PubNub channel the Galileo is broadcasting from (```pubnub-intel-gal-demo```), and render the data in a ```gauge``` type chart.
+Create the chart with the following function. We supply the same PubNub channel the Galileo is broadcasting from (```pubnub-intel-gal-demo```) and render the data in a ```gauge``` type chart. EON-chart subscribes to that PubNub channel, renders the chart, and updates it when the value changes.
 
 ![](http://pubnub.github.io/eon/static/images/gauge.gif)
 
@@ -183,9 +193,7 @@ Now crate the chart with eon-chart. With this one function, we'll connect to the
 </script>
 ```
 
-Load this page up in chrome and turn the potentiometer. 
-
-![](http://i.imgur.com/4aerUHX.gif)
+Try it out! Load this page up in chrome and turn the potentiometer. 
 
 ```html
 <html>
@@ -220,5 +228,15 @@ Load this page up in chrome and turn the potentiometer.
   </body>
 </html>
 ```
+
+# Wohoo!
+
+That's it! Now you're Galileo is broadcasting it's information over the internet (via PubNub) and into a webpage. You're probably loading the page locally, but it can be hosted anywhere and it'll still work all the same. 
+
+![](http://i.imgur.com/4aerUHX.gif)
+
+# Where to go from here
+
+You can extend this demo by adding more charts (a spline chart for example), more analog inputs (more potentiometers, buttons, light sensors, etc), or even adding more microcontrollers. You can even use PubNub to allow one Galileo to talk to another Galileo, or command them all from a centralized control panel!
 
 Keywords: Mac, thunderbolt, ethernet, galileo, iot, dashboard, realtime chart, potentiometer, gen 2 
