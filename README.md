@@ -61,11 +61,9 @@ The Analog Read demo is pretty boring without any anlog input. Let's wire the po
 
 Potentiometers are simple. 5 volts goes into one pin and the ground goes out the other pin. When you turn the potentiometer, it increases or decreases resistance and that value is fed out the middle pin.
 
-Here's an example of a potentiometer wired into an Arduino.
+![](http://i.imgur.com/JZcPBDh.jpg)
 
-![](http://arduino.cc/en/uploads/Tutorial/potentiometer.jpg)
-
-However, this diagram shows the wiring into analog input 2, while we're going to be using analog input 0.
+The red wire is 5v, the black wire is ground, and the green wire is fed into analog input 0.
 
 You can test your setup with a multimeter, or dive right into the code.
 
