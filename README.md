@@ -16,8 +16,6 @@ I originally tried to build this with Raspberry Pi, but discovered it doesn't ha
 
 The [Intel Galileo](http://www.intel.com/content/www/us/en/do-it-yourself/galileo-maker-quark-board.html) is really a fantastic product. Not only are you getting Intel quality hardware, packaging, and documentation, but it also comes with a custom IDE powered by Brackets. It was harder to setup than the Raspberry Pi and Arduino (Uno and Yun). 
 
-However! Once you're setup you can not beat the Intel XDK IOT environment. 
-
 ![](https://software.intel.com/sites/default/files/managed/8e/2f/intelxdkiot_develop.png)
 
 This thing is beefy, it's like Eclipse for Javascript and IOT. The IDE includes Error checking (jshint), deployment, NPM UI buttons, and a freakin devtools inspector! That's not even mentioning access to an Arduino inspired header layout, all accessable from NPM modules that come with every example.
